@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AE Tech Inc. | Innovate. Automate. Elevate.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a56db;
@@ -19,6 +20,12 @@
             --border-radius: 8px;
             --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
+            
+            /* Dark mode colors - initially same as light */
+            --footer-bg: #0f172a;
+            --footer-text: #ffffff;
+            --footer-links: #cbd5e1;
+            --footer-accent: #0ea5e9;
         }
         
         .dark-theme {
@@ -31,6 +38,12 @@
             --gray: #94a3b8;
             --gray-light: #1e293b;
             --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            
+            /* Dark mode specific footer colors */
+            --footer-bg: #0a1123;
+            --footer-text: #f1f5f9;
+            --footer-links: #94a3b8;
+            --footer-accent: #0ea5e9;
         }
         
         * {
@@ -140,15 +153,47 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--secondary);
+            gap: 15px;
         }
         
         .logo-image {
-            height: 40px;
+            height: 42px;
             width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .company-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            letter-spacing: -0.5px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+        
+        .company-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 3px;
         }
         
         nav ul {
@@ -161,6 +206,7 @@
             font-weight: 500;
             position: relative;
             transition: var(--transition);
+            font-family: 'Inter', sans-serif;
         }
         
         nav a:hover {
@@ -195,10 +241,17 @@
             color: var(--gray);
             cursor: pointer;
             transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .theme-toggle:hover {
             color: var(--primary);
+            background-color: rgba(26, 86, 219, 0.1);
         }
         
         .search-container {
@@ -212,17 +265,24 @@
             color: var(--gray);
             cursor: pointer;
             transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .search-toggle:hover {
             color: var(--primary);
+            background-color: rgba(26, 86, 219, 0.1);
         }
         
         .search-box {
             position: absolute;
             top: 100%;
             right: 0;
-            width: 300px;
+            width: 350px;
             background: var(--light);
             border: 1px solid var(--gray-light);
             border-radius: var(--border-radius);
@@ -234,6 +294,18 @@
         
         .search-box.active {
             display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .search-input {
@@ -251,6 +323,7 @@
         .search-input:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
         }
         
         .search-results {
@@ -263,6 +336,7 @@
             border-bottom: 1px solid var(--gray-light);
             cursor: pointer;
             transition: var(--transition);
+            border-radius: 4px;
         }
         
         .search-result-item:hover {
@@ -273,11 +347,25 @@
             font-size: 1rem;
             margin-bottom: 5px;
             color: var(--secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
         
         .search-result-item p {
             font-size: 0.9rem;
             color: var(--gray);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-result-item small {
+            display: inline-block;
+            background-color: rgba(26, 86, 219, 0.1);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            font-weight: 500;
         }
         
         .hamburger {
@@ -287,6 +375,17 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .hamburger:hover {
+            background-color: rgba(26, 86, 219, 0.1);
         }
         
         /* Hero Section */
@@ -327,6 +426,8 @@
             margin-bottom: 20px;
             color: var(--secondary);
             line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
         
         .hero p {
@@ -386,6 +487,8 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
         }
         
         .service-card p {
@@ -421,6 +524,11 @@
             width: 100%;
             background-size: cover;
             background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.05);
         }
         
         .project-content {
@@ -431,6 +539,8 @@
             font-size: 1.4rem;
             margin-bottom: 10px;
             color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
         }
         
         .project-content p {
@@ -442,12 +552,14 @@
             display: inline-block;
             margin-top: 15px;
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
+            font-family: 'Inter', sans-serif;
         }
         
         .project-link:hover {
             color: var(--primary-dark);
+            transform: translateX(5px);
         }
         
         .view-all {
@@ -480,6 +592,19 @@
             margin-bottom: 25px;
             color: var(--dark);
             line-height: 1.7;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            font-family: Georgia, serif;
         }
         
         .client-info {
@@ -499,12 +624,15 @@
             color: var(--primary);
             font-weight: 600;
             font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .client-details h4 {
             font-size: 1.1rem;
             margin-bottom: 5px;
             color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
         }
         
         .client-details p {
@@ -523,6 +651,8 @@
         .cta-content h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
         
         .cta-content p {
@@ -542,6 +672,7 @@
         .cta-btns .btn {
             background: white;
             color: var(--primary);
+            font-weight: 600;
         }
         
         .cta-btns .btn-secondary {
@@ -550,11 +681,12 @@
             color: white;
         }
         
-        /* Footer */
+        /* Footer - Fixed for Dark Mode */
         footer {
-            background-color: var(--secondary);
-            color: white;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
             padding: 80px 0 30px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .footer-grid {
@@ -569,6 +701,9 @@
             margin-bottom: 25px;
             position: relative;
             padding-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--footer-text);
         }
         
         .footer-col h3::after {
@@ -578,7 +713,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background-color: var(--accent);
+            background-color: var(--footer-accent);
         }
         
         .footer-links {
@@ -590,12 +725,13 @@
         }
         
         .footer-links a {
-            color: #cbd5e1;
+            color: var(--footer-links);
             transition: var(--transition);
+            font-family: 'Inter', sans-serif;
         }
         
         .footer-links a:hover {
-            color: white;
+            color: var(--footer-text);
             padding-left: 5px;
         }
         
@@ -614,10 +750,12 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
+            color: var(--footer-text);
         }
         
         .social-links a:hover {
             background-color: var(--primary);
+            color: white;
             transform: translateY(-3px);
         }
         
@@ -630,11 +768,11 @@
             align-items: flex-start;
             gap: 15px;
             margin-bottom: 20px;
-            color: #cbd5e1;
+            color: var(--footer-links);
         }
         
         .contact-info i {
-            color: var(--accent);
+            color: var(--footer-accent);
             margin-top: 5px;
         }
         
@@ -642,7 +780,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 30px;
             text-align: center;
-            color: #cbd5e1;
+            color: var(--footer-links);
             font-size: 0.9rem;
         }
         
@@ -654,12 +792,42 @@
         }
         
         .legal-links a {
-            color: #cbd5e1;
+            color: var(--footer-links);
             transition: var(--transition);
         }
         
         .legal-links a:hover {
-            color: white;
+            color: var(--footer-text);
+        }
+        
+        /* Enhanced Dark Mode Styling */
+        .dark-theme .service-card,
+        .dark-theme .project-card,
+        .dark-theme .testimonial-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-theme .search-box {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-theme .search-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-theme .search-input::placeholder {
+            color: var(--gray);
+        }
+        
+        .dark-theme .search-result-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Smooth theme transition */
+        body * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         
         /* Responsive Styles */
@@ -671,11 +839,15 @@
             .hero h1 {
                 font-size: 2.8rem;
             }
+            
+            .company-name {
+                font-size: 1.6rem;
+            }
         }
         
         @media (max-width: 768px) {
             .hamburger {
-                display: block;
+                display: flex;
             }
             
             nav {
@@ -733,6 +905,18 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .company-name {
+                font-size: 1.4rem;
+            }
+            
+            .company-tagline {
+                font-size: 0.7rem;
+            }
+            
+            .logo-image {
+                height: 36px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -760,6 +944,18 @@
             .footer-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .logo {
+                gap: 10px;
+            }
+            
+            .company-name {
+                font-size: 1.2rem;
+            }
+            
+            .logo-image {
+                height: 32px;
+            }
         }
     </style>
 </head>
@@ -769,7 +965,10 @@
         <div class="container header-container">
             <a href="index.html" class="logo">
                 <img src="https://i.postimg.cc/xNG7yXxj/1761848917107-(1).png" alt="AE Tech Inc. Logo" class="logo-image">
-                <span>AE Tech Inc.</span>
+                <div class="logo-text">
+                    <div class="company-name">AE TECH INC.</div>
+                    <div class="company-tagline">ALAMINEDGE TECHNOLOGIES</div>
+                </div>
             </a>
             
             <button class="hamburger" id="hamburger">
@@ -972,7 +1171,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>AE Tech Inc.</h3>
-                    <p style="margin-bottom: 20px; color: #cbd5e1;">Innovating for a smarter tomorrow. We deliver cutting-edge technology solutions that drive business growth and digital transformation.</p>
+                    <p style="margin-bottom: 20px; color: var(--footer-links);">Innovating for a smarter tomorrow. We deliver cutting-edge technology solutions that drive business growth and digital transformation.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1133,6 +1332,13 @@
                 category: "Service",
                 link: "services.html",
                 keywords: "Cybersecurity Security Data Protection Network Security"
+            },
+            {
+                title: "Software Solutions",
+                description: "Custom software and mobile applications",
+                category: "Service",
+                link: "services.html",
+                keywords: "Software Development Mobile Apps Enterprise Solutions"
             },
             {
                 title: "Enterprise AI Platform",
