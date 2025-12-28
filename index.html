@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AE Tech Inc. | Innovate. Automate. Elevate.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --secondary: #0f172a;
+            --accent: #00b4d8;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --border-radius: 8px;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        .dark-theme {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #f1f5f9;
+            --accent: #0ea5e9;
+            --light: #0f172a;
+            --dark: #f8fafc;
+            --gray: #94a3b8;
+            --gray-light: #1e293b;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 86, 219, 0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+        
+        .dark-theme header {
+            background-color: rgba(15, 23, 42, 0.95);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+        
+        nav a {
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            color: var(--primary);
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-toggle:hover {
+            color: var(--primary);
+        }
+        
+        .search-box {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: none;
+            z-index: 1001;
+        }
+        
+        .search-box.active {
+            display: block;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--dark);
+            background-color: var(--light);
+            margin-bottom: 15px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-result-item:hover {
+            background-color: rgba(26, 86, 219, 0.1);
+        }
+        
+        .search-result-item h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .search-result-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 120px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark-theme .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            border-radius: 0 0 0 100px;
+        }
+        
+        .dark-theme .hero::before {
+            filter: brightness(0.7);
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 550px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 100px 0;
+            background-color: var(--gray-light);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: var(--light);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-img {
+            height: 220px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .project-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        .view-all {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .client-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .client-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btns .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta-btns .btn-secondary {
+            background: transparent;
+            border-color: white;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+        
+        .contact-info i {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        
+        .legal-links a {
+            color: #cbd5e1;
+            transition: var(--transition);
+        }
+        
+        .legal-links a:hover {
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero::before {
+                width: 40%;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--light);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .search-box {
+                width: calc(100vw - 40px);
+                right: -10px;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://i.postimg.cc/xNG7yXxj/1761848917107-(1).png" alt="AE Tech Inc. Logo" class="logo-image">
+                <span>AE Tech Inc.</span>
+            </a>
+            
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-container">
+                    <button class="search-toggle" id="search-toggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-box" id="search-box">
+                        <input type="text" class="search-input" id="search-input" placeholder="Search services, projects, articles...">
+                        <div class="search-results" id="search-results">
+                            <!-- Search results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Innovate. Automate. Elevate.</h1>
+                <p>AE Tech Inc. delivers cutting-edge technology solutions that transform businesses and drive growth in the digital age. We combine AI, software engineering, and strategic insights to create exceptional value for our clients.</p>
+                <div class="hero-btns">
+                    <a href="contact.html" class="btn">Get a Quote</a>
+                    <a href="services.html" class="btn btn-secondary">View Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Services</h2>
+                <p>We offer a comprehensive suite of technology solutions designed to meet the evolving needs of modern businesses.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-search="AI Machine Learning Artificial Intelligence Automation">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Custom AI solutions that automate processes, analyze data, and deliver predictive insights to drive smarter business decisions.</p>
+                </div>
+                
+                <div class="service-card" data-search="Web Development Website Application Frontend Backend">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Responsive, high-performance websites and web applications built with the latest technologies and best practices.</p>
+                </div>
+                
+                <div class="service-card" data-search="Software Development Mobile Apps Enterprise Solutions">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Software Solutions</h3>
+                    <p>Custom software development tailored to your specific business needs, from enterprise systems to mobile applications.</p>
+                </div>
+                
+                <div class="service-card" data-search="Cybersecurity Security Data Protection Network Security">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Comprehensive security solutions to protect your digital assets, data, and infrastructure from emerging threats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p>Explore some of our recent work that showcases our expertise in delivering innovative technology solutions.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-search="Enterprise AI Platform Analytics Fortune 500">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');"></div>
+                    <div class="project-content">
+                        <h3>Enterprise AI Platform</h3>
+                        <p>Developed a comprehensive AI-driven analytics platform for a Fortune 500 company, improving decision-making by 40%.</p>
+                        <a href="projects.html" class="project-link">View Case Study →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-search="FinTech Dashboard Financial Analytics Real-time">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80');"></div>
+                    <div class="project-content">
+                        <h3>FinTech Dashboard</h3>
+                        <p>Created an intuitive financial dashboard with real-time analytics for a leading financial services company.</p>
+                        <a href="projects.html" class="project-link">View Case Study →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-search="E-commerce Platform Retail Sales Personalization">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');"></div>
+                    <div class="project-content">
+                        <h3>E-commerce Platform</h3>
+                        <p>Built a scalable e-commerce platform with personalized recommendations, increasing sales by 35% for our client.</p>
+                        <a href="projects.html" class="project-link">View Case Study →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all">
+                <a href="projects.html" class="btn">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Trusted by businesses of all sizes across various industries to deliver exceptional technology solutions.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-search="Jessica Smith TechForward Efficiency">
+                    <p class="testimonial-text">"AE Tech Inc. transformed our digital infrastructure completely. Their AI solution increased our operational efficiency by 45% and provided insights we never had before."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">JS</div>
+                        <div class="client-details">
+                            <h4>Jessica Smith</h4>
+                            <p>CTO, TechForward Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-search="Michael Rodriguez Cybersecurity SecureData">
+                    <p class="testimonial-text">"The cybersecurity framework implemented by AE Tech Inc. has given us peace of mind. Their team is professional, knowledgeable, and always available when we need them."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">MR</div>
+                        <div class="client-details">
+                            <h4>Michael Rodriguez</h4>
+                            <p>CEO, SecureData Corp</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-search="Amanda Kim Web Platform Global Retail">
+                    <p class="testimonial-text">"Working with AE Tech Inc. on our new web platform was seamless. They delivered beyond our expectations, on time and within budget. Highly recommended!"</p>
+                    <div class="client-info">
+                        <div class="client-avatar">AK</div>
+                        <div class="client-details">
+                            <h4>Amanda Kim</h4>
+                            <p>Marketing Director, Global Retail Group</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Let's discuss how AE Tech Inc. can help you leverage technology to achieve your business goals and stay ahead of the competition.</p>
+                <div class="cta-btns">
+                    <a href="contact.html" class="btn">Contact Us Today</a>
+                    <a href="services.html" class="btn btn-secondary">Request a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>AE Tech Inc.</h3>
+                    <p style="margin-bottom: 20px; color: #cbd5e1;">Innovating for a smarter tomorrow. We deliver cutting-edge technology solutions that drive business growth and digital transformation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">AI & Machine Learning</a></li>
+                        <li><a href="services.html">Web Development</a></li>
+                        <li><a href="services.html">Software Solutions</a></li>
+                        <li><a href="services.html">Cybersecurity</a></li>
+                        <li><a href="services.html">Cloud Solutions</a></li>
+                        <li><a href="services.html">IT Consulting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>123 Innovation Drive<br>San Francisco, CA 94107</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>(555) 123-4567</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>info@aetechinc.com</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AE Tech Inc. | AlaminEdge Technologies Inc. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+            // Close search box when opening mobile menu
+            searchBox.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            
+            // Update icon and save preference
+            if (body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Search Functionality
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBox = document.getElementById('search-box');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        
+        // Toggle search box
+        searchToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            searchBox.classList.toggle('active');
+            if (searchBox.classList.contains('active')) {
+                searchInput.focus();
+            }
+            // Close mobile menu when opening search
+            nav.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close search box when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!searchBox.contains(e.target) && !searchToggle.contains(e.target)) {
+                searchBox.classList.remove('active');
+            }
+        });
+        
+        // Search data - in a real app, this would come from a database
+        const searchData = [
+            {
+                title: "AI & Machine Learning",
+                description: "Custom AI solutions for automation and data analysis",
+                category: "Service",
+                link: "services.html",
+                keywords: "AI Machine Learning Artificial Intelligence Automation Data Analytics"
+            },
+            {
+                title: "Web Development",
+                description: "Responsive websites and web applications",
+                category: "Service",
+                link: "services.html",
+                keywords: "Web Development Website Application Frontend Backend Responsive"
+            },
+            {
+                title: "Cybersecurity",
+                description: "Protection for digital assets and data",
+                category: "Service",
+                link: "services.html",
+                keywords: "Cybersecurity Security Data Protection Network Security"
+            },
+            {
+                title: "Enterprise AI Platform",
+                description: "AI-driven analytics for Fortune 500 company",
+                category: "Project",
+                link: "projects.html",
+                keywords: "Enterprise AI Platform Analytics Fortune 500 Decision Making"
+            },
+            {
+                title: "FinTech Dashboard",
+                description: "Real-time financial analytics dashboard",
+                category: "Project",
+                link: "projects.html",
+                keywords: "FinTech Dashboard Financial Analytics Real-time"
+            },
+            {
+                title: "E-commerce Platform",
+                description: "Scalable platform with personalized recommendations",
+                category: "Project",
+                link: "projects.html",
+                keywords: "E-commerce Platform Retail Sales Personalization"
+            },
+            {
+                title: "Jessica Smith Testimonial",
+                description: "CTO of TechForward Inc. - Efficiency increased by 45%",
+                category: "Testimonial",
+                link: "#testimonials",
+                keywords: "Jessica Smith TechForward Efficiency AI Solution"
+            },
+            {
+                title: "About AE Tech Inc.",
+                description: "Learn about our mission, vision, and team",
+                category: "Page",
+                link: "about.html",
+                keywords: "About Company Mission Vision Team"
+            },
+            {
+                title: "Contact Us",
+                description: "Get in touch for a consultation or quote",
+                category: "Page",
+                link: "contact.html",
+                keywords: "Contact Quote Consultation Support"
+            },
+            {
+                title: "Our Blog",
+                description: "Latest insights on technology trends",
+                category: "Page",
+                link: "blog.html",
+                keywords: "Blog Articles Insights Technology Trends"
+            }
+        ];
+        
+        // Search function
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            searchResults.innerHTML = '';
+            
+            if (query.length < 2) {
+                searchResults.innerHTML = '<div class="search-result-item"><p>Type at least 2 characters to search</p></div>';
+                return;
+            }
+            
+            const results = searchData.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.description.toLowerCase().includes(query) ||
+                       item.keywords.toLowerCase().includes(query) ||
+                       item.category.toLowerCase().includes(query);
+            });
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item"><p>No results found for "' + query + '"</p></div>';
+                return;
+            }
+            
+            results.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <h4>${item.title}</h4>
+                    <p>${item.description}</p>
+                    <small>${item.category}</small>
+                `;
+                resultItem.addEventListener('click', () => {
+                    window.location.href = item.link;
+                    searchBox.classList.remove('active');
+                });
+                searchResults.appendChild(resultItem);
+            });
+        });
+        
+        // Close search on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchBox.classList.remove('active');
+            }
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
